@@ -1,0 +1,159 @@
+Ensembling Proceedure with CV Metrics
+========================================================
+author: 
+date: 
+autosize: true
+
+Previously . . .
+========================================================
+
+*In an effort to improve score modeling performance:*
+
+ - New individual classifier ensembling proceedures were considered that leverage classification probability
+ 
+ - It was suggest that weighting on individual classifer cross validation metrics be considered
+
+Which CV Metric?
+========================================================
+
+*Problem:*
+There are lots of ways to evaluvte classification algorithm performance. What metric should use for weighting?
+
+**Proposal:**
+Select metric that provides a pair of values; 
+(probability that prediction of this type are correct, probability that prediction of this type is incorrect)
+
+Which CV Metric?
+========================================================
+
+**Proposal:**
+Select metric that provides a pair of values; 
+(probability that prediction of this type are correct, probability that prediction of this type is incorrect)
+
+*This would allow weighting using combination of probability estimates of based on algorithm "confidence" individual response scoring and model performance*
+
+Which CV Metric?
+========================================================
+
+**Proposal:**
+Select metric that provides a pair of values; 
+(probability that prediction of this type are correct, probability that prediction of this type is incorrect)
+
+Positive:  \( \sum_{\rm{Algorithms}} P_{\rm{Prediction}}(+) P_{\rm{Performance}}(+)  > \sum_{\rm{Algorithms}} P_{\rm{Prediction}}(-) P_{\rm{Performance}}(-) \)
+
+
+Which CV Metric?
+========================================================
+
+```{r,echo=FALSE}
+df <- data.frame(Negative=c("TN","FP"),Positive=c("FN","TP"))
+rownames(df) <- c("Negative","Positive")
+kable(df)
+```
+
+Postive Preiction: (Positive Prediction Value = TP/(TP+FP), False Omission Rate = FN/(TN+FN))
+
+Negative Prediction: (False Discovery Rate = FP/(TP+FP), Negative Prediction Value= TN/(TN+FN))
+
+Which CV Metric? Alternate
+========================================================
+
+**Proposal:**
+Select metric that provides a pair of values; 
+(probability that prediction of this type are correct, probability that prediction of this type is incorrect)
+
+Positive: \( \sum_{\rm{Algorithms}} P_{\rm{Prediction}}(+)^a P_{\rm{Performance}}(+)^b  > \sum_{\rm{Algorithms}} P_{\rm{Prediction}}(-)^a P_{\rm{Performance}}(-)^b \)
+
+Testing: Weight Loss
+========================================================
+
+N=1175
+
+Cross Validation Kappa Values
+```{r,echo=FALSE}
+
+Human <- c(385,10,99,478,10,219)
+Simple <- c(0.955,0.181,0.387,0.695,0,0.857)
+Weighted <- c(0.957,0.459,0.512,0.707,0,0.880)
+PLR <- c(0.956,-0.002,0.621,0.733,0,0.889)
+PLR2 <- c(0.956,0.000,0.586,0.727,0,0.886)
+PCV <- c(0.957,0.011,0.655,0.723,0.000,0.880)
+
+outDF <- data.frame(Human,Simple,Weighted,PLR,PCV)
+colnames(outDF) <- c("Human","Simple","Prob Weighted","PLR L2","Prob + CV")
+kable(outDF)
+```
+
+Testing: Root Cell
+=========================================================
+
+N=677
+Cross Validation Kappa Values
+```{r,echo=FALSE}
+
+Human <- c(175,127,69,139,110)
+Simple <- c(0.795,0.812,0.738,0.878,0.580)
+Weighted <- c(0.827,0.838,0.755,0.908,0.608)
+PLR <- c(0.809,0.828,0.681,0.895,0.610)
+PLR2 <-c(0.805,0.803,0.626,0.884,0.606)
+PCV <- c(0.840,0.833,0.786,0.903,0.634)
+
+outDF <- data.frame(Human,Simple,Weighted,PLR,PCV)
+colnames(outDF) <- c("Human","Simple","Prob Weighted","PLR L2","Prob + CV")
+
+#outDF <- data.frame(Human,Simple,Weighted,PLR,PLR2)
+#colnames(outDF) <- c("Human","Simple","Weighted","PLR L2","PLR L1")
+kable(outDF)
+
+```
+
+
+
+Testing: Grape
+========================================================
+
+N=317
+
+Cross Validation Kappa Values
+```{r,echo=FALSE}
+Human <- c(161,56,28,62,67)
+Simple <- c(0.861,0.712,0.364,0.562,0.630)
+Weighted <- c(0.905,0.813,0.509,0.671,0.694)
+PLR <- c(0.905,0.814,0.680,0.774,0.740)
+PLR2 <-c(0.912,0.812,0.595,0.791,0.800)
+PCV <- c(0.886,0.902,0.900,0.768,0.777)
+
+outDF <- data.frame(Human,Simple,Weighted,PLR,PCV)
+colnames(outDF) <- c("Human","Simple","Prob Weighted","PLR L2","Prob + CV")
+
+#outDF <- data.frame(Human,Simple,Weighted,PLR,PLR2)
+#colnames(outDF) <- c("Human","Simple","Weighted","PLR L2","PLR L1")
+kable(outDF)
+
+```
+
+Testing: Non-coding Mutation
+=========================================================
+
+N=301
+Cross Validation Kappa Values
+```{r,echo=FALSE}
+
+Human <- c(224,183,35,45,38,55,38)
+Simple <- c(0.729,0.818,0.734,0.427,0.596,0.835,0.422)
+Weighted <- c(0.727,0.795,0.779,0.531,0.652,0.861,0.475)
+PLR <- c(0.706,0.768,0.755,0.489,0.525,0.824,0.300)
+PLR2 <-c(0.693,0.762,0.800,0.493,0.583,0.794,0.208)
+PCV <- c(0.724,0.788,0.898,0.658,0.761,0.861,0.619)
+
+outDF <- data.frame(Human,Simple,Weighted,PLR,PCV)
+colnames(outDF) <- c("Human","Simple","Prob Weighted","PLR L2","Prob + CV")
+
+
+#outDF <- data.frame(Human,Simple,Weighted,PLR,PLR2)
+#colnames(outDF) <- c("Human","Simple","Weighted","PLR L2","PLR L1")
+kable(outDF)
+
+```
+
+

@@ -1,0 +1,29 @@
+---
+title: "AACR Slide Decks"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Conference Presentations
+
+[The Development of Constructed Response Astronomy Items : NARST 2016](http://matthewmsteele.github.io/NARST2016/)
+
+[AACR: Probing Student Thinking with Computer Analyzed Response Questions : AAPT 2015 Summer Meeting](AAPT2015/AACRatAAPT.html)
+
+## QDC Meeting Slides
+
+[Exploring Ensemble Proceedure, Pt II : 2/23/2017](ensembleII/ensembleWithCVMetric.html)
+
+[Exploring Ensemble Proceedure, Pt I : 1/19/2017](ensembleI/ensembleProcedure.html)
+
+
+## FLC-PD Meeting Slides
+
+[AACR Instructor Feedback Reports : 9-13-2016](webAppReports/webAppReports.html)
+
+## Other Slides
+
+[Confirmatory Analysis; MSU Local Meeting : 5-19-2016](Confirmatory/Confirmatory.html)
